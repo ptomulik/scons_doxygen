@@ -2,13 +2,13 @@
 # -*- mode:python; coding:utf-8; -*-
 #
 # Astxx, the Asterisk C++ API and Utility Library.
-# Copyright (C) 2005, 2006  Matthew A. Nicholson
-# Copyright (C) 2006  Tim Blechmann
+# Copyright © 2005, 2006  Matthew A. Nicholson
+# Copyright © 2006  Tim Blechmann
 #
-#  Copyright (C) 2007 Christoph Boehme
+#  Copyright © 2007 Christoph Boehme
 #
-#  Copyright (C) 2012 Dirk Baechle
-#  Copyright (C) 2012 Eric Anderson
+#  Copyright © 2012 Dirk Baechle
+#  Copyright © 2012 Eric Anderson
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -148,7 +148,7 @@ def DoxySourceFiles(node, env):
    # that relative pathnames in node must be adjusted before they can
    # go onto the sources list
    conf_dir = os.path.dirname(str(node))
-   
+
    input = data.get("INPUT")
    if input:
       for node in data.get("INPUT", []):
@@ -192,7 +192,7 @@ def DoxySourceFiles(node, env):
       if not os.path.isabs(file):
          file = os.path.join(conf_dir, file)
       sources.append(file)
-   
+
    # Add additional files to the list of source files:
    def append_additional_source(option, formats):
       for f in formats:
@@ -260,7 +260,7 @@ def DoxyEmitter(target, source, env):
          env.Precious(od)
          # set up cleaning stuff
          env.Clean(od, od)
-         
+
          # Add target files
          if k != "MAN":
             # Is an extension override var given?
@@ -280,14 +280,14 @@ def DoxyEmitter(target, source, env):
             filepaths = DoxySourceFiles(source[0], env)
             for f in filepaths:
                if os.path.isfile(f) and f != doxy_fpath:
-                  of = env.File( os.path.join(out_dir, 
-                                              data.get(k + "_OUTPUT", v[1]), 
+                  of = env.File( os.path.join(out_dir,
+                                              data.get(k + "_OUTPUT", v[1]),
                                               "man"+manext,
                                               f+"."+manext))
                   targets.append(of)
                   # don't clean single files, we remove the complete output folders (see above)
                   env.NoClean(of)
-         
+
    # add the tag file if neccessary:
    tagfile = data.get("GENERATE_TAGFILE", "")
    if tagfile != "":
@@ -312,13 +312,13 @@ def generate_doxygen_commands(source, target, env, for_signature):
    timestamping (harder).  The second part requires us to know which
    directories are being built, which is why we do this as a Generator
    (after the Emitter has run)"""
-   
+
    dox_cmd = "cd ${SOURCE.dir}  &&  ${DOXYGEN} ${SOURCE.file}"
    timestamp_cmds = ["date > %s"%(str(t)) for t in target]
    print dox_cmd
    print timestamp_cmds
    return [dox_cmd] + timestamp_cmds
-   
+
 
 def generate(env):
    """
